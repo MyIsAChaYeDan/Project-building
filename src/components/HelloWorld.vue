@@ -138,7 +138,7 @@ export default {
     },
     mounted(){
       this.drawLine();
-      console.log(this.URL.test)
+      console.log(this.URL.test11)
     }
 }
 </script>
