@@ -1,7 +1,143 @@
-let URL={
-    // 存放所有请求地址
-    test:'www.baidu.com'
+import Vue from 'vue';
+import './url';
+import router from '../router';
+import store from '../vuex/store.js';
+
+
+// 引入axios配置
+import axios from 'axios';
+Vue.prototype.$axios = axios;
+// 请求错误处理
+var errorFn = function (err) {
+    if (err.toString().indexOf('timeout') != -1) {
+        Vue.prototype.$message.error('请求超时，请稍后再试');
+    } else if (err.toString().indexOf('Network') != -1) {
+        Vue.prototype.$message.error('连接错误，请检查网络');
+    }
+    if (err && err.response) {
+        switch (err.response.status) {
+            case 400:
+            err.message = '请求错误';
+            break;
+    
+            case 401:
+            err.message = '未授权，请登录';
+            break;
+    
+            case 403:
+            err.message = '拒绝访问';
+            break;
+    
+            case 404:
+            err.message = `请求地址出错: ${err.response.config.url}`;
+            break;
+    
+            case 408:
+            err.message = '请求超时';
+            break;
+    
+            case 500:
+            err.message = '服务器开个小差，请稍后再试';
+            break;
+    
+            case 501:
+            err.message = '服务器开个小差，请稍后再试';
+            break;
+    
+            case 502:
+            err.message = '服务器开个小差，请稍后再试';
+            break;
+    
+            case 503:
+            err.message = '服务器开个小差，请稍后再试';
+            break;
+    
+            case 504:
+            err.message = '服务器开个小差，请稍后再试';
+            break;
+    
+            case 505:
+            err.message = 'HTTP版本不受支持';
+            break;
+    
+            default:
+            err.message = '请求失败，请稍后再试';
+        }
+        Vue.prototype.$message.error(err.message);
+    }
+    return Promise.reject(err);
+};
+// 设置请求参数url 随机 防止ie缓存
+function changeURLArg(url = '', arg = '', arg_val = '') {
+    var pattern = arg + '=([^&]*)';
+    var replaceText = arg + '=' + arg_val;
+    if (url.match(pattern)) {
+        var reg = new RegExp('(' + arg + '=)([^&]*)', 'gi');
+        return url.replace(reg, replaceText);
+    } else {
+        if (url.match('[\?]')) {
+        return url + '&' + replaceText;
+        } else {
+        return url + '?' + replaceText;
+        }
+    }
 }
-export default{
-    URL
+// 接口返回数据提示
+var responseFn = function (response){
+    if (response.data.code == '200'){
+        Vue.prototype.$message.success(response.data.message || response.data.rspMsg);
+    }else{
+        // 某个状态 跳回登陆
+        // router.push({
+        //     name: 'Login'
+        // });
+    }
 }
+
+// 封装实例化axios 学生
+let httpStudent= axios.create({
+    baseURL: '/common',//是否配置请求前缀
+    timeout: 30000,// 超时时间 30s
+})
+httpStudent.interceptors.request.use(
+    config => {
+        config.url=changeURLArg(config.url, 't', new Date().getTime());//防止ie缓存
+        // config.headers.setHeader = false; //是否设置请求头
+        return config;
+    },
+    err => {
+        return null
+    }
+)
+httpStudent.interceptors.response.use(
+    response => {
+        return response;
+    }, 
+    errorFn, //接口返回状态码 根据状态码 给出提示
+    responseFn
+);
+Vue.prototype.httpStudent = httpStudent;
+
+// 封装实例化axios 老师
+let httpTeacher= axios.create({
+    baseURL: '/common',//是否配置请求前缀
+    timeout: 30000,// 超时时间 30s
+})
+httpTeacher.interceptors.request.use(
+    config => {
+        config.url=changeURLArg(config.url, 't', new Date().getTime());//防止ie缓存
+        // config.headers.setHeader = false; //是否设置请求头
+        return config;
+    },
+    err => {
+        return null
+    }
+)
+httpTeacher.interceptors.response.use(
+    response => {
+        return response;
+    }, 
+    errorFn, //接口返回状态码 根据状态码 给出提示
+    responseFn
+);
+Vue.prototype.httpTeacher = httpTeacher;

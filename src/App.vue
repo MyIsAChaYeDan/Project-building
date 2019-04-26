@@ -9,9 +9,6 @@
 export default {
   name: 'App',
   created(){
-    this.$http.get('http://www.baidu.com').then(red=>{
-      
-    })
   }
 }
 </script>

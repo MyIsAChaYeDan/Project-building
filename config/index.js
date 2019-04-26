@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      '/api': {     
+          target: 'http://partnertest.longhu.net:5876', //代理地址
+          changeOrigin: true,
+          secure: false,  //target默认情况下，不接受运行在HTTPS上，且使用了无效证书的后端服务器。如果你想要接受, 则需设置该项为false
+          pathRewrite: {
+              '^/api': '' //是否保留请求前缀
+          }        
+      }
+    },// 开发环境 跨域配置
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -45,18 +54,18 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../dist/index.html'), //打包后 项目主入口地址
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsRoot: path.resolve(__dirname, '../dist'), //打包生成目录 地址
+    assetsSubDirectory: 'static', //静态资源文件目录存放地址
+    assetsPublicPath: '/',//打包后是否根目录 如果不是根目录 则对应 服务器文件夹名字
 
     /**
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: true, //打包是否生成 suorceMap 文件 如果不需要 可以设置为fou
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

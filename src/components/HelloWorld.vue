@@ -55,6 +55,7 @@
       </quill-editor>
 
       <div id="myChart" :style="{width: '300px', height: '300px'}"></div>
+      <div id="Test">测试样式</div>
   </div>
 </template>
 <script>
@@ -137,9 +138,19 @@ export default {
         },
     },
     mounted(){
+      // echart 实例化 需要拿到dom 需要在 mounted钩子 函数里面实例化
       this.drawLine();
-      console.log(this.URL.test1)
-      
+      console.log(this.URL) //请求地址
+      console.log(this.library) // 公共方法
+      console.log(this.$store.state.common)//vuex
+      // axios 使用 学生
+      this.httpStudent.get(this.URL.test,{}).then(red=>{
+        
+      })
+      //  老师
+      this.httpTeacher.get(this.URL.test,{}).then(red=>{
+        
+      })
     }
 }
 </script>
