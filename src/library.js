@@ -200,7 +200,6 @@ export default {
         formData.append("sendTime", date.getTime() + "");
         formData.append("appType", "01");
         formData.append("authToken", Vue.prototype.library.getCookie('userToken'));
-        //ifca$log$account
         let userName = Vue.prototype.library.getCookie('ifca$log$account');
         /*
          * 生产和测试环境 优先获取cookies下的ifca$log$account也是username
@@ -215,6 +214,7 @@ export default {
                 formData.append("userName", Vue.prototype.library.getCookie('ifca$log$account'));
             }
         }
+
         formData.append("devId", "");
         if (data) {
             formData.append("file", data, data.name); //增加文件名称 解决ie11下上传文件名带路径的问题

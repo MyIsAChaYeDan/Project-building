@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import './url';
-import router from '../router';
-import store from '../vuex/store.js';
+import router from '../router'; //如果需要用
+import store from '../vuex/store.js'; //如果需要用
 
 
 // 引入axios配置
@@ -96,7 +96,7 @@ var responseFn = function (response){
 
 // 封装实例化axios 学生
 let httpStudent= axios.create({
-    baseURL: '/common',//是否配置请求前缀
+    baseURL: '/student',//是否配置请求前缀
     timeout: 30000,// 超时时间 30s
 })
 httpStudent.interceptors.request.use(
@@ -120,7 +120,7 @@ Vue.prototype.httpStudent = httpStudent;
 
 // 封装实例化axios 老师
 let httpTeacher= axios.create({
-    baseURL: '/common',//是否配置请求前缀
+    baseURL: '/teacher',//是否配置请求前缀
     timeout: 30000,// 超时时间 30s
 })
 httpTeacher.interceptors.request.use(

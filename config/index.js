@@ -11,13 +11,21 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {     
-          target: 'http://partnertest.longhu.net:5876', //代理地址
-          changeOrigin: true,
-          secure: false,  //target默认情况下，不接受运行在HTTPS上，且使用了无效证书的后端服务器。如果你想要接受, 则需设置该项为false
-          pathRewrite: {
-              '^/api': '' //是否保留请求前缀
-          }        
+      '/student':{
+        target:'https://api.github.com', //代理地址
+        secure: false,  // https 接口为 false  如果是http 则为true
+        changeOrigin:true,
+        pathRewrite: {
+          '^/student': ''
+        }
+      },
+      '/teacher':{
+        target:'https://api.github.com', //代理地址
+        secure: false,  // https 接口为 false  如果是http 则为true
+        changeOrigin:true,
+        pathRewrite: {
+          '^/teacher': ''
+        }
       }
     },// 开发环境 跨域配置
 
