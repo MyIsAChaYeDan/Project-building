@@ -15,7 +15,7 @@ module.exports = {
         target:'https://api.github.com', //代理地址
         secure: false,  // https 接口为 false  如果是http 则为true
         changeOrigin:true,
-        pathRewrite: {
+        pathRewrite: { //接口区分
           '^/student': ''
         }
       },
@@ -23,7 +23,7 @@ module.exports = {
         target:'https://api.github.com', //代理地址
         secure: false,  // https 接口为 false  如果是http 则为true
         changeOrigin:true,
-        pathRewrite: {
+        pathRewrite: { //接口区分
           '^/teacher': ''
         }
       }
