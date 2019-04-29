@@ -279,14 +279,6 @@ export default {
         }
         return result;
     },
-    removeCookie(key) {
-        let d = new Date(),
-            v = this.getCookie(key);
-        d.setTime(d.getTime() - 1000);
-        if (v !== undefined) {
-            document.cookie = key + "=" + v + ";expires=" + d.toGMTString() + ";path=/;Domain=.longhu.net;";
-        }
-    },
     //获取url参数
     getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
