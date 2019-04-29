@@ -103,7 +103,7 @@ httpStudent.interceptors.request.use(
     config => {
         config.url=changeURLArg(config.url, 't', new Date().getTime());//防止ie缓存
         if(store.state&&store.state.common.status){//设置token 从vuex里面取
-             config.headers.setHeader = store.state.common.status; //是否设置请求头
+             config.headers.setHeader = 'tokentokentokentoken'; //是否设置请求头
         }
         return config;
     },
@@ -129,7 +129,7 @@ httpTeacher.interceptors.request.use(
     config => {
         config.url=changeURLArg(config.url, 't', new Date().getTime());//防止ie缓存
         if(store.state&&store.state.common.status){ //设置token 从vuex里面取
-            config.headers.setHeader = store.state.common.status; //是否设置请求头
+            config.headers.setHeader = 'tokentokentokentoken'; //是否设置请求头
         }
         return config;
     },
