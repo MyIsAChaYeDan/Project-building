@@ -196,31 +196,7 @@ export default {
     // FormData格式化
     transFormData(json, data, ) {
         var formData = new FormData();
-        var date = new Date();
-        formData.append("sendTime", date.getTime() + "");
-        formData.append("appType", "01");
-        formData.append("authToken", Vue.prototype.library.getCookie('userToken'));
-        let userName = Vue.prototype.library.getCookie('ifca$log$account');
-        /*
-         * 生产和测试环境 优先获取cookies下的ifca$log$account也是username
-         * 开发环境 从vuex里面进行获取userName
-         * */
-        if (userName) {
-            formData.append("userName", userName);
-        } else {
-            if (window.sessionStorage.vuex) {
-                formData.append("userName", JSON.parse(window.sessionStorage.vuex).common.accountInfo.name);
-            } else {
-                formData.append("userName", Vue.prototype.library.getCookie('ifca$log$account'));
-            }
-        }
-
-        formData.append("devId", "");
-        if (data) {
-            formData.append("file", data, data.name); //增加文件名称 解决ie11下上传文件名带路径的问题
-        }
         formData.append("data", JSON.stringify(json.data));
-        formData.append("sign", "2959f1aea8db0f7fbba61f0f8474d0ef");
         return formData;
     },
     // 数字转中文
