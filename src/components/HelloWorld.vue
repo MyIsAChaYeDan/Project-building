@@ -144,6 +144,8 @@ export default {
       console.log(this.URL) //请求地址
       console.log(this.library) // 公共方法
       console.log(this.$store.state.common)//vuex
+      // 如果推送token 通过登录接口 然后把 token 存放到 vuex里面  然后在request.js 里面取设置 header  现在已经增加 vuex持久化
+      this.$store.commit('changeStatus',true)
       // axios 使用 学生
       // 测试请求
       this.httpStudent.get(this.studentURL.users,

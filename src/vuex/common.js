@@ -1,10 +1,10 @@
-export default{
-    state:{
-        status:false
+export default {
+    state: {
+        status: false,
     },
-    mutations:{
-        changeStatus(state,data){
-            state.status=data
-        }
+    mutations: {
+        changeStatus(state,data){ 
+            state.status=data;
+        },
     }
 }

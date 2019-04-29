@@ -102,7 +102,9 @@ let httpStudent= axios.create({
 httpStudent.interceptors.request.use(
     config => {
         config.url=changeURLArg(config.url, 't', new Date().getTime());//防止ie缓存
-        // config.headers.setHeader = false; //是否设置请求头
+        if(store.state&&store.state.common.status){//设置token 从vuex里面取
+             config.headers.setHeader = store.state.common.status; //是否设置请求头
+        }
         return config;
     },
     err => {
@@ -126,7 +128,9 @@ let httpTeacher= axios.create({
 httpTeacher.interceptors.request.use(
     config => {
         config.url=changeURLArg(config.url, 't', new Date().getTime());//防止ie缓存
-        // config.headers.setHeader = false; //是否设置请求头
+        if(store.state&&store.state.common.status){ //设置token 从vuex里面取
+            config.headers.setHeader = store.state.common.status; //是否设置请求头
+        }
         return config;
     },
     err => {
