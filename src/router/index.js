@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import prossTable from '@/components/prossTable'
 import layout from '@/components/layout'
 import teacher from '@/components/teacher/teacher'
 import student from '@/components/student/student'
@@ -13,6 +14,11 @@ export default new Router({
       path: '/HelloWorld', //示例组件
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/prossTable', //示例组件
+      name: 'prossTable',
+      component: prossTable
     },
     {
       path: '/', //最大的父组件

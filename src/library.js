@@ -16,7 +16,11 @@ Date.prototype.Format = function (fmt) {
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
-
+// 数组chunk
+Array.prototype.chunk = function(n){
+    for(var i = 0, temp = [], l = ~~this.length / n; temp.length < l; temp[i++] = this.splice(0, n));
+    return temp;
+}
 // v-dialogDrag: 弹窗拖拽
 Vue.directive('dialogDrag', {
     bind(el, binding, vnode, oldVnode) {
@@ -521,5 +525,19 @@ export default {
         // 得到offsetTop值相加的值之和，即元素距离顶部的高度
         return actualTop - 100;
     },
-    
+    // 简易克隆 如果存在function 或者prototype 不会克隆 只能克隆纯数据
+    cloneObject(obj){
+        let data=JSON.parse(JSON.stringify(obj));
+        return data
+    },
+    // 判断对象类型
+    getType(obj){
+        if(Object.prototype.toString.call(obj)=='[object Object]'){
+            return 'Object';
+        }else if(Object.prototype.toString.call(obj)=='[object Array]'){
+            return 'Array';
+        }else{
+            return 'nomal';
+        }
+    },
 };
